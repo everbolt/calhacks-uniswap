@@ -1,20 +1,20 @@
 import React from "react";
 
 const scaleNames = {
-  c: 'ETH',
-  f: 'USDC'
+  a: 'ETH',
+  b: 'USDC'
 };
 
-function toCelsius(fahrenheit) {
-  return fahrenheit / 4100;
+function toCoinA(coinB) {
+  return coinB / 4100;
 }
 
-function toFahrenheit(celsius) {
-  return celsius * 4100;
+function toCoinB(coinA) {
+  return coinA * 4100;
 }
 
-function tryConvert(temperature, convert) {
-  const input = parseFloat(temperature);
+function tryConvert(amount, convert) {
+  const input = parseFloat(amount);
   if (Number.isNaN(input)) {
     return '';
   }
@@ -23,23 +23,23 @@ function tryConvert(temperature, convert) {
   return rounded.toString();
 }
 
-class TemperatureInput extends React.Component {
+class CoinInput extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e) {
-    this.props.onTemperatureChange(e.target.value);
+    this.props.onCoinChange(e.target.value);
   }
 
   render() {
-    const temperature = this.props.temperature;
+    const amount = this.props.amount;
     const scale = this.props.scale;
     return (
       <fieldset>
         <legend>Enter number of {scaleNames[scale]}:</legend>
-        <input value={temperature}
+        <input value={amount}
                 onChange={this.handleChange} />
       </fieldset>
     );
@@ -49,35 +49,35 @@ class TemperatureInput extends React.Component {
 class Calculator extends React.Component {
   constructor(props) {
     super(props);
-    this.handleCelsiusChange = this.handleCelsiusChange.bind(this);
-    this.handleFahrenheitChange = this.handleFahrenheitChange.bind(this);
-    this.state = {temperature: '', scale: 'c'};
+    this.handleCoinAChange = this.handleCoinAChange.bind(this);
+    this.handleCoinBChange = this.handleCoinBChange.bind(this);
+    this.state = {amount: '', scale: 'a'};
   }
 
-  handleCelsiusChange(temperature) {
-    this.setState({scale: 'c', temperature});
+  handleCoinAChange(amount) {
+    this.setState({scale: 'a', amount});
   }
 
-  handleFahrenheitChange(temperature) {
-    this.setState({scale: 'f', temperature});
+  handleCoinBChange(amount) {
+    this.setState({scale: 'b', amount});
   }
 
   render() {
     const scale = this.state.scale;
-    const temperature = this.state.temperature;
-    const celsius = scale === 'f' ? tryConvert(temperature, toCelsius) : temperature;
-    const fahrenheit = scale === 'c' ? tryConvert(temperature, toFahrenheit) : temperature;
+    const amount = this.state.amount;
+    const coinA = scale === 'b' ? tryConvert(amount, toCoinA) : amount;
+    const coinB = scale === 'a' ? tryConvert(amount, toCoinB) : amount;
 
     return (
       <div>
-        <TemperatureInput
-          scale="c"
-          temperature={celsius}
-          onTemperatureChange={this.handleCelsiusChange} />
-        <TemperatureInput
-          scale="f"
-          temperature={fahrenheit}
-          onTemperatureChange={this.handleFahrenheitChange} />
+        <CoinInput
+          scale="a"
+          amount={coinA}
+          onCoinChange={this.handleCoinAChange} />
+        <CoinInput
+          scale="b"
+          amount={coinB}
+          onCoinChange={this.handleCoinBChange} />
       </div>
     );
   }
