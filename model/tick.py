@@ -4,6 +4,6 @@ class Tick:
     def __init__(self, ltick, rtick, L):
         self.pa = pow(1.0001, ltick)
         self.pa = sqrt(self.pa)
-        self.pa = pow(1.0001, rtick)
+        self.pb = pow(1.0001, rtick)
         self.pb = sqrt(self.pb)
         self.L = L
