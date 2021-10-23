@@ -6,11 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import token_names from './Data/token_names.js'
 
-function DropdownOptions (props) {
-  return (
-    Object.keys(props.tokens).map(token => <MenuItem value={token} key={token}>{token} </MenuItem>)
-  )
-}
+const token_names_array = Object.values(token_names.token_names)
 
 export default function BasicSelect() {
   const [coin, setCoin] = React.useState('');
@@ -30,8 +26,13 @@ export default function BasicSelect() {
           label="Coin"
           onChange={handleChange}
         >
-          <DropdownOptions tokens={token_names.token_names} />
-          <MenuItem value={1}>1</MenuItem>
+          {token_names_array?.map(token => {
+          return (
+            <MenuItem key={token} value={token}>
+              {token ?? token}
+            </MenuItem>
+          );
+      })}
         </Select>
       </FormControl>
     </Box>
