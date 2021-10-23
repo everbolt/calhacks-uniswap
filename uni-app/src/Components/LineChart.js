@@ -6,7 +6,8 @@ const LineChart = () => {
     <div>
       <Line 
         data = {{
-          labels: ['1','2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+          // labels: ['1','2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+          labels: [1,2,3,4,5,6,7,8,9,10,11,12],
           datasets: [
             {
               label: 'DataSet1',
@@ -28,7 +29,13 @@ const LineChart = () => {
           },
           borderColor: "#080554",
           backgroundColor: "#b3b2d4",
-          pointBackgroundColor: "#f731ed"
+          pointBackgroundColor: "#f731ed",
+          scales: {
+            x: {
+              type: 'linear',
+              suggestedMinimum: 1
+            }
+          }
         }}
       
       />
