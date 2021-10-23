@@ -74,6 +74,11 @@ class Calculator extends React.Component {
     const coinA = scale === 'b' ? tryConvert(amount, toCoinA) : amount;
     const coinB = scale === 'a' ? tryConvert(amount, toCoinB) : amount;
 
+    //Triggered when second token is chosen
+    //Determine the token ID's locally
+    // Pull USD value of each token via API
+    // Locally determine conversion rate based on the two values
+
     return (
       <div>
         <CoinInput
