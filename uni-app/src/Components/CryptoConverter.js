@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  useQuery,
-  gql
-} from "@apollo/client";
+import { useQuery, gql } from "@apollo/client";
 
 const TOKEN_VALUES = gql`
   query GetTokenValues {
