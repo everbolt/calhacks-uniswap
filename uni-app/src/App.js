@@ -1,5 +1,4 @@
 import React from 'react';
-
 import './App.css';
 import LineChart from './Components/LineChart';
 import MinimumDistanceSliderWithInput from './Components/MinSliderWithInput';
