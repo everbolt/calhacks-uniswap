@@ -8,9 +8,6 @@ import tokens from './Components/Data/tokens.js'
 import BasicSelect from './Components/Dropdown.js';
 
 const App = () => {
-  
-  console.log(JSON.stringify(tokens))
-  
   return (
     <div>
       <LineChart />
