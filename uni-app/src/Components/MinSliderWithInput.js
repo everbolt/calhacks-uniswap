@@ -5,7 +5,6 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Slider from '@mui/material/Slider';
 import MuiInput from '@mui/material/Input';
-import VolumeUp from '@mui/icons-material/VolumeUp';
 
 const Input1 = styled(MuiInput)`
   width: 42px;
@@ -14,7 +13,6 @@ const Input2 = styled(MuiInput)`
   width: 42px;
 `;
 
-const minDistance = 0
 var tickSize = 10
 var minValue = 0
 var maxValue = 100
@@ -28,9 +26,9 @@ export default function MinimumDistanceSliderWithInput() {
     }
 
     if (activeThumb === 0) {
-      setValue([Math.min(newValue[0], value[1] - minDistance), value[1]]);
+      setValue([Math.min(newValue[0], value[1]), value[1]]);
     } else {
-      setValue([value[0], Math.max(newValue[1], value[0] + minDistance)]);
+      setValue([value[0], Math.max(newValue[1], value[0])]);
     }
   };
 
@@ -39,7 +37,7 @@ export default function MinimumDistanceSliderWithInput() {
       setValue(['', value[1]]);
     } else {
       var inputNumber = Number(event.target.value)
-      setValue([Math.min(inputNumber, value[1]), value[1]])
+      setValue([Math.min(inputNumber, value[1]), Math.max(inputNumber, value[1])])
     }
   };
 
@@ -48,7 +46,7 @@ export default function MinimumDistanceSliderWithInput() {
       setValue([value[0], '']);
     } else {
       var inputNumber = Number(event.target.value)
-      setValue([value[0], Math.max(inputNumber, value[0])])
+      setValue([Math.min(inputNumber, value[1]), Math.max(inputNumber, value[1])])
     }
   };
 
@@ -100,6 +98,12 @@ export default function MinimumDistanceSliderWithInput() {
               'aria-labelledby': 'input-slider',
             }}
           />
+        </Grid>
+        <Grid item>
+          <Typography id="input-slider" gutterBottom>
+            {value[0]}
+            {value[1]}
+          </Typography>
         </Grid>
       </Grid>
     </Box>
