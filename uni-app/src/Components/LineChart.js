@@ -17,6 +17,13 @@ const LineChart = () => {
           ]
         }}
         
+        options = {{
+          interaction: {
+            mode: 'index',
+            axis: 'x',
+            intersect: false
+          }
+        }}
       />
     </div>
   )
