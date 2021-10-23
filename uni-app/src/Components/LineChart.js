@@ -10,16 +10,12 @@ const LineChart = () => {
           datasets: [
             {
               label: 'DataSet1',
-              data: [1, 5, 6, 16, 1, 5, 3, 7, 4, 8, 9, 3],
-              borderColor: "#f731ed",
-              backgroundColor: "#080554",
+              data: [1, 5, 6, 10, 1, 5, 3, 7, 4, 8, 9, 3],
               fill: +1,
             }, 
             {
               label: 'DataSet2',
-              data: [12, 19, 9, 17, 2, 8, 7, 10, 5, 10, 11, 7],
-              borderColor: "#f731ed",
-              backgroundColor: "#080554",
+              data: [12, 19, 9, 17, 5, 8, 7, 10, 5, 10, 11, 7],
             }, 
           ]
         }}
@@ -30,7 +26,11 @@ const LineChart = () => {
             axis: 'x',
             intersect: false
           },
+          borderColor: "#080554",
+          backgroundColor: "#b3b2d4",
+          pointBackgroundColor: "#f731ed"
         }}
+      
       />
     </div>
   )
