@@ -31,36 +31,20 @@ const TOKEN_VALUES = gql`
         "0x6123b0049f904d730db3c36a31167d9d4121fa6b",
         "0xb4efd85c19999d84251304bda99e90b92300bd93",
         "0x95ad61b0a150d79219dcf64e1e6cc01f0b64c4ce",
-      ]
-    },
-      orderBy:derivedETH,
-      orderDirection:desc){
-    id
-    name
-    derivedETH
+      ]},
+        orderBy:derivedETH,
+        orderDirection:desc){
+      id
+      name
+      derivedETH
+    }
   }
-}
 `
-
-function TokenValues() {
-  const { loading, error, data } = useQuery(TOKEN_VALUES);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
-  return data.tokens.map(({ id, name, derivedETH }) => (
-    <div key={id}>
-      <p>
-        {name}: {derivedETH}
-      </p>
-    </div>
-  ));
-}
 
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <App />
-      <TokenValues />
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
