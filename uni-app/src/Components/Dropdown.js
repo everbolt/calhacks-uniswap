@@ -8,7 +8,7 @@ import token_names from './Data/token_names.js'
 
 function DropdownOptions (props) {
   return (
-    Object.keys(props.tokens.token_names).map(token => <MenuItem value={token} key={token}>{token} </MenuItem>)
+    Object.keys(props.tokens).map(token => <MenuItem value={token} key={token}>{token} </MenuItem>)
   )
 }
 
@@ -16,10 +16,9 @@ export default function BasicSelect() {
   const [coin, setCoin] = React.useState('');
 
   const handleChange = (event) => {
+    console.log(event.target.value);
     setCoin(event.target.value);
   };
-  console.log(token_names)
-  const test = token_names
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
@@ -31,10 +30,8 @@ export default function BasicSelect() {
           label="Coin"
           onChange={handleChange}
         >
-          
-          {/* Object.keys(token_names).map(token => <MenuItem value={token}>{token} </MenuItem>) */}
-          
-          <DropdownOptions tokens={test} />
+          <DropdownOptions tokens={token_names.token_names} />
+          <MenuItem value={1}>1</MenuItem>
         </Select>
       </FormControl>
     </Box>
