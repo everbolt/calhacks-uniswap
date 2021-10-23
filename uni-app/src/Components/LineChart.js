@@ -1,12 +1,35 @@
 import React from "react";
 import {Line} from "react-chartjs-2"
+import { useQuery, gql } from "@apollo/client";
+
+const POOL_TICKS = gql`
+  query GetTokenValues {
+    pool(id: "0xcbcdf9626bc03e24f779434178a73a0b4bad62ed"){
+      ticks(first:1000 orderBy:tickIdx orderDirection:asc){
+        id
+        price0
+        price1
+        volumeUSD
+        tickIdx
+      }
+    }
+  }
+`
 
 const LineChart = () => {
+  const { loading, error, data } = useQuery(POOL_TICKS);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error</p>;
+  
+  //DISPLAY DATA HERE
+  console.log(data)
+
   return (
     <div>
       <Line 
         data = {{
-          labels: ['1','2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+          // labels: ['1','2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
+          labels: [1,2,3,4,5,6,7,8,9,10,11,12],
           datasets: [
             {
               label: 'DataSet1',
@@ -28,7 +51,13 @@ const LineChart = () => {
           },
           borderColor: "#080554",
           backgroundColor: "#b3b2d4",
-          pointBackgroundColor: "#f731ed"
+          pointBackgroundColor: "#f731ed",
+          scales: {
+            x: {
+              type: 'linear',
+              suggestedMinimum: 1
+            }
+          }
         }}
       
       />

@@ -1,4 +1,4 @@
-const tokens_names = {
+const token_names = {
     "WETH": "Ether",
     "USDC": "USD Coin",
     "WBTC": "Wrapped BTC",
@@ -12,4 +12,4 @@ const tokens_names = {
     "SHIB": "Shiba Inu"
 }
 
-module.exports(token_names)
+module.exports = {token_names}
