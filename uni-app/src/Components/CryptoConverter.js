@@ -5,12 +5,18 @@ const scaleNames = {
   b: 'USDC'
 };
 
+const scaleAmount = {
+  a: 4100,
+  b: 1
+}
+const exchangeRate = scaleAmount['a'] / scaleAmount['b'];
+
 function toCoinA(coinB) {
-  return coinB / 4100;
+  return coinB / exchangeRate;
 }
 
 function toCoinB(coinA) {
-  return coinA * 4100;
+  return coinA * exchangeRate;
 }
 
 function tryConvert(amount, convert) {
@@ -19,7 +25,7 @@ function tryConvert(amount, convert) {
     return '';
   }
   const output = convert(input);
-  const rounded = Math.round(output * 1000) / 1000;
+  const rounded = Math.round(output * 100000) / 100000;
   return rounded.toString();
 }
 
