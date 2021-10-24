@@ -1,7 +1,7 @@
 from tick import Tick
 from pool import Pool
 from trade_distribution import create_trade_distribution
-from swap_parser import get_swapa
+from swap_parser import get_swaps
 import numpy as np
 
 '''
