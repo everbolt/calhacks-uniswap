@@ -46,7 +46,7 @@ function CoinInput(props) {
   
   return (
     <fieldset>
-      <legend>Enter number of {scale}:</legend>
+      <legend>Enter number of {scale ? scale : "COIN"}:</legend>
       <input value={amount}
               onChange={handleChange} />
     </fieldset>
