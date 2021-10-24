@@ -19,7 +19,7 @@ data = json.load(f)['data']
 liquidity_concentration = []
 
 for curr_tick in data['ticks']:
-    liquidity_concentration += [tick.Tick(0, 0, int(curr_tick['tickIdx']), int(curr_tick['liquidityGross']), 0)]
+    liquidity_concentration += [tick.Tick(0, 0, int(curr_tick['tickIdx']), int(curr_tick['liquidityGross']), int(curr_tick['liquidityNet']))]
 
 liquidity_concentration = sorted(liquidity_concentration, key = lambda tick: tick.idx)
 
