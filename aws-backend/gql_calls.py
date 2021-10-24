@@ -1,7 +1,7 @@
 import requests
 import json
 
-pool_id = "0xcbcdf9626bc03e24f779434178a73a0b4bad62ed"
+#pool_id = "0xcbcdf9626bc03e24f779434178a73a0b4bad62ed"
 
 def getTicks(pool_id):
   url = "https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v3"

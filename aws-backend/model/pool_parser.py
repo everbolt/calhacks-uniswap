@@ -15,7 +15,10 @@ def getTokenDecimals(data):
 #from gql_calls import *
 #data_tick = getTicks(pool_id)
 #data_pool = getPoolData(pool_id)
-def createPool(decimals_dic, data_tick, data_pool):
+def createPool(data_tick, data_pool, data_tokens):
+    
+    decimals_dic = getTokenDecimals(data_tokens)
+    
     liquidity_concentration = []
 
     for curr_tick in data_tick:
