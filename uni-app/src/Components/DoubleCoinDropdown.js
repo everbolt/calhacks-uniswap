@@ -25,8 +25,9 @@ function SelectA(prop) {
 
   const handleChange = (event) => {
     setCoin(event.target.value);
-    prop.setCoinA(event.target.value);
     prop.setCoinA_name(event.target.value);
+    prop.setCoinB_name("");
+    prop.setAvailableFeeTier([false, false, false]);
   };
   return (
     <Box sx={{ minWidth: 120 }}>
@@ -109,21 +110,22 @@ function SelectBDisabled(prop) {
 }
 
 function DoubleDropdown(prop) {
-  const [coinA, setCoinA] = React.useState('');  
+  // const [coinA_name, setCoinA_name] = React.useState('');
+  // const [coinB_name, setCoinB_name] = React.useState('');
 
   return (
     <Box sx={{ width: 300 }}>
       <Grid container spacing={2} alignItems="center">
         <Grid item>
-          <SelectA tokens={Object.keys(token_names.token_names)} setCoinA = {setCoinA} setCoinA_name = {prop.setCoinA_name}/>
+          <SelectA tokens={Object.keys(token_names.token_names)} coinA_name={prop.coinA_name} coinB_name={prop.coinB_name} setCoinA_name={prop.setCoinA_name} setCoinB_name={prop.setCoinB_name} setAvailableFeeTier={prop.setAvailableFeeTier}/>
         </Grid>
-        {coinA === "" ?
+        {prop.coinA_name === "" ?
           <Grid item>
             <SelectBDisabled />
           </Grid>
           :
           <Grid item>
-            <SelectB tokens={availablePools(coinA)} coinA = {coinA} setCoinB_name = {prop.setCoinB_name}/>
+            <SelectB tokens={availablePools(prop.coinA_name)} coinA_name={prop.coinA_name} coinB_name={prop.coinB_name} setCoinB_name={prop.setCoinB_name} setPoolId={prop.setPoolId} feeTier={prop.feeTier}/>
           </Grid>
         }
         

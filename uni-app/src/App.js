@@ -8,32 +8,32 @@ import LineChart from './Components/LineChart';
 import SliderGraph from './Components/SliderGraph';
 import { useQuery, gql } from "@apollo/client";
 
-const POOL_TICKS = gql`
-  query GetTokenValues {
-    pool(id: "0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8"){
-      ticks(first:1000 orderBy:tickIdx orderDirection:asc){
-        id
-        price0
-        price1
-        liquidityGross
-        liquidityNet
-        tickIdx
-      }
-    }
-  }
-`
 
 //"#0F051B"
 //"#FFFFFF"
 const App = () => {
-  const { loading, error, data } = useQuery(POOL_TICKS);
+  const [poolId, setPoolId] = React.useState("0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8");
+
+  const POOL_TICKS = gql`
+    query GetTokenValues($pool_id: String!) {
+      pool(id: $pool_id){
+        ticks(first:1000 orderBy:tickIdx orderDirection:asc){
+          id
+          price0
+          price1
+          liquidityGross
+          liquidityNet
+          tickIdx
+        }
+      }
+    }
+  `
+
+  const { loading, error, data } = useQuery(
+    POOL_TICKS, {variables: {"pool_id": poolId}});
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error</p>;
   
-  //DISPLAY DATA HERE
-  // console.log(data)
-  // console.log(data['pool']['ticks'][200])
-  // console.log(data['pool']['ticks'][250])
   const availableTicks = [[],[]];
   var sum = 0;
   for (let i = 0; i < data['pool']['ticks'].length; i++) {
@@ -97,7 +97,7 @@ const App = () => {
               paddingLeft: "160px"
             }}
           >
-            <DropdownIntoConverter />
+            <DropdownIntoConverter setPoolId={setPoolId}/>
           </div>
           
         </div>
