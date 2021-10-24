@@ -1,0 +1,2 @@
+def getTradesPerDay(data):
+    pass

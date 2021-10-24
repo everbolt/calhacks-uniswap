@@ -15,3 +15,6 @@ class Simulator:
         for _ in range(num_trades):
             self.pool.swap(self.trade_distr())
             #tracking gains/ losses
+
+    def run_simulations(self, num_days=365):
+        return
