@@ -2,15 +2,20 @@ import React from 'react';
 import './App.css';
 import TotalVolumeGraph from './Components/TotalVolumeGraph';
 
-import MinimumDistanceSliderWithInput from './Components/MinSliderWithInput';
 import DropdownIntoConverter from './Components/DropdownIntoConverter';
+import RangeSlider from './Components/RangeSlider';
+import LineChart from './Components/LineChart';
+import * as ChartAnnotation from 'chartjs-plugin-annotation';
+import MyChart from './Components/TestingAnnotation';
 
 const App = () => {
   return (
     <div>
       <TotalVolumeGraph />
-      <MinimumDistanceSliderWithInput />
+      <RangeSlider />
       <DropdownIntoConverter />
+      {/* <MyChart /> */}
+      {/* <LineChart /> */}
     </div>
   )
 }
