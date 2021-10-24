@@ -3,8 +3,6 @@ import './App.css';
 import TotalVolumeGraph from './Components/TotalVolumeGraph';
 
 import MinimumDistanceSliderWithInput from './Components/MinSliderWithInput';
-import Calculator from './Components/CryptoConverter'
-import DoubleDropdown from './Components/DoubleCoinDropdown';
 import DropdownIntoConverter from './Components/DropdownIntoConverter';
 
 const App = () => {

@@ -1,5 +1,4 @@
 import React from "react";
-import {Line} from "react-chartjs-2"
 
 import {Bar} from "react-chartjs-2"
 import { useQuery, gql } from "@apollo/client";
@@ -12,6 +11,7 @@ const POOL_TICKS = gql`
         price0
         price1
         liquidityGross
+        liquidityNet
         tickIdx
       }
     }
@@ -28,31 +28,26 @@ const TotalVolumeGraph = () => {
   // console.log(data['pool']['ticks'][200])
   // console.log(data['pool']['ticks'][250])
   const availableTicks = [[],[]];
-
+  var sum = 0;
   for (let i = 0; i < data['pool']['ticks'].length; i++) {
-    var sum = 0;
-    // Number(data['pool']['ticks'][i]['tickIdx']) > 0 && Number(data['pool']['ticks'][i]['tickIdx']) < 400000 &&
-    if (data['pool']['ticks'][i]['liquidityGross'] !=='0') {
-      // sum += Math.log(Number(data['pool']['ticks'][i]['price0'])) / Math.log(1.0001);
-      availableTicks[0].push(Number(data['pool']['ticks'][i]['tickIdx']));
-      availableTicks[1].push(Number(data['pool']['ticks'][i]['liquidityGross'])**0.5);
-    }
+      sum += Number(data['pool']['ticks'][i]['liquidityNet']);
+      availableTicks[0].push(10**12 / (1.0001 ** Number(data['pool']['ticks'][i]['tickIdx'])));
+      availableTicks[1].push(sum);
   }
   console.log(availableTicks);
 
+  const start = 175;
+  const end = 700;
   return (
     <div>
       <Bar
         data = {{
-          // labels: ['1','2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-          // labels: [1,2,3,4,5,6,7,8,9,10,11,12],
-          labels: availableTicks[0].slice(0,12),
+          labels: availableTicks[0].slice(start, end),
           datasets: [
             {
               label: 'DataSet1',
-              // data: [12, 19, 9, 17, 5, 8, 7, 10, 5, 10, 11, 7],
-              data: availableTicks[1],
-              fill: 0,
+              data: availableTicks[1].slice(start, end),
+              // fill: +1,
             }, 
             // {
             //   label: 'DataSet2',
