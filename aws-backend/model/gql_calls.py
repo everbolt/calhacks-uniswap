@@ -74,6 +74,7 @@ def getPoolData(pool_id):
         sqrtPrice
         tick
         liquidity
+        feeTier
       }
     }
   """
