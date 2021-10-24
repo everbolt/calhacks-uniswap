@@ -14,6 +14,8 @@ import { useQuery, gql } from "@apollo/client";
 const App = () => {
   const [poolId, setPoolId] = React.useState("0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8");
 
+  //ADDING API CALL PARAMETERS
+
   const POOL_TICKS = gql`
     query GetTokenValues($pool_id: String!) {
       pool(id: $pool_id){

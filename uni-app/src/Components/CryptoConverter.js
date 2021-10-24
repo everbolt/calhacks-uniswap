@@ -113,7 +113,9 @@ function Calculator(props) {
   return (
     <div
       style={{
-        width: "fit-content"
+        width: "fit-content",
+        marginLeft: "23px",
+        marginTop: "25px"
       }}
     >
     <CoinInput
