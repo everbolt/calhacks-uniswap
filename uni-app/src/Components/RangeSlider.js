@@ -34,7 +34,7 @@ export default function RangeSlider(props) {
   return (
     <Box 
       sx={{ 
-        width: 585,
+        width: 540,
         paddingTop: "35px",
         paddingLeft: "113px"
       }}

@@ -7,7 +7,7 @@ import uniflow_logo from './Components/uniflow.png'
 import LineChart from './Components/LineChart';
 import SliderGraph from './Components/SliderGraph';
 import { useQuery, gql } from "@apollo/client";
-
+import GraphOverlay from "./Components/GraphOverlay"
 
 //"#0F051B"
 //"#FFFFFF"
@@ -20,6 +20,15 @@ const App = () => {
   const [feeTier, setFeeTier] = React.useState('');
 
   //ADDING API CALL PARAMETERS
+  const [APIloading, setAPIloading] = React.useState(false)
+  const [APIpoolid, setAPIpoolid] = React.useState("");
+  const [APIlowerbound, setAPIlowerbound] = React.useState("");
+  const [APIupperbound, setAPIupperbound] = React.useState("");
+  const [APItoken0quantity, setAPItoken0quantity] = React.useState("");
+  const [APItoken1quantity, setAPItoken1quantity] = React.useState("");
+
+  const [generatedData, setGeneratedData] = React.useState({})
+  const [finishedGeneration, setFinishedGeneration] = React.useState(false)
 
   const POOL_TICKS = gql`
     query GetTokenValues($pool_id: String!) {
@@ -56,6 +65,11 @@ const App = () => {
         backgroundColor: "#0F051B"
       }}
     >
+      {finishedGeneration ? 
+      <GraphOverlay graphData={generatedData}/>:
+    <div/>
+    }
+      
       <div>
         <div
           style={{
@@ -67,7 +81,6 @@ const App = () => {
         >
           <SliderGraph 
             availableTicks={availableTicks}
-            
             setPoolId={setPoolId} 
             coinA_name={coinA_name} 
             setCoinA_name={setCoinA_name} 
@@ -125,6 +138,15 @@ const App = () => {
               setAvailableFeeTier={setAvailableFeeTier}
               feeTier={feeTier}
               setFeeTier={setFeeTier}
+
+              setAPIloading={setAPIloading}
+              setGeneratedData={setGeneratedData}
+              APIpoolid={APIpoolid}
+              APIlowerbound={APIlowerbound}
+              APIupperbound={APIupperbound}
+              APItoken0quantity={APItoken0quantity}
+              APItoken1quantity={APItoken1quantity}
+              setFinishedGeneration={setFinishedGeneration}
             />
           </div>
           

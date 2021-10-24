@@ -56,7 +56,7 @@ function CoinInput(prop) {
           color: "white"
         }}
       >
-        Enter number of {scale ? scale : "COIN"}:
+        Quantity of {scale ? scale : "COIN"}:
       </legend>
       <input value={amount} onChange={handleChange} />
     </fieldset>

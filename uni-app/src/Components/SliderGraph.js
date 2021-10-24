@@ -7,13 +7,17 @@ function SliderGraph(prop) {
   const [lineValue, setLineValue] = React.useState([30, 70])  
   
   return (
-    <div>
+    <div
+      style={{
+        marginTop: "140px"
+      }}
+    >
       <TotalVolumeGraph
         lineValue={lineValue}
         availableTicks={prop.availableTicks}
       />
       <RangeSlider
-        sliderMax={100}
+        sliderMax={10383}
         setLineValue={setLineValue}
       />
     </div>

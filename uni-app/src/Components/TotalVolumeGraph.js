@@ -13,7 +13,7 @@ function VerticalLine (props) {
         width: 2,
         height: 368,
         position: "absolute",
-        marginLeft: (113 + props.lineValue / 100 * 585) + 'px',
+        marginLeft: (110 + props.lineValue / 10383 * 544) + 'px',
         marginTop: "25px",
         backgroundColor: "#f731ed"
       }}
