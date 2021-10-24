@@ -2,6 +2,7 @@ import React from "react";
 
 import {Bar} from "react-chartjs-2"
 import { useQuery, gql } from "@apollo/client";
+import Box from '@mui/material/Box';
 
 const POOL_TICKS = gql`
   query GetTokenValues {
@@ -18,7 +19,23 @@ const POOL_TICKS = gql`
   }
 `
 
-const TotalVolumeGraph = (prop) => {
+function VerticalLine (prop) {
+  return (
+    <Box
+      sx={{
+        zIndex: 10,
+        width: 2,
+        height: 385,
+        position: "absolute",
+        marginLeft: "350px",
+        marginTop: "20px",
+        backgroundColor: "#f731ed"
+      }}
+    />
+  )
+}
+
+function TotalVolumeGraph(props) {
   const { loading, error, data } = useQuery(POOL_TICKS);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error</p>;
@@ -38,8 +55,10 @@ const TotalVolumeGraph = (prop) => {
 
   const start = 175;
   const end = 700;
+
   return (
     <div>
+      <VerticalLine />
       <Bar
         data = {{
           labels: availableTicks[0].slice(start, end),
@@ -91,7 +110,6 @@ const TotalVolumeGraph = (prop) => {
           barThickness: "flex",
           borderWidth: 1,
           hoverBorderColor: "#ffffff",
-          
         }}
       
       

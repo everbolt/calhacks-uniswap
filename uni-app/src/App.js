@@ -4,6 +4,8 @@ import TotalVolumeGraph from './Components/TotalVolumeGraph';
 import DropdownIntoConverter from './Components/DropdownIntoConverter';
 import RangeSlider from './Components/RangeSlider';
 import uniflow_logo from './Components/uniflow.png'
+import LineChart from './Components/LineChart';
+import SliderGraph from './Components/SliderGraph';
 
 //"#0F051B"
 //"#FFFFFF"
@@ -25,8 +27,7 @@ const App = () => {
             paddingLeft: '20px'
           }}
         >
-          <TotalVolumeGraph />
-          <RangeSlider />
+          <SliderGraph />
         </div>
         <div
           style={{
