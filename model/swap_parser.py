@@ -4,11 +4,11 @@ import math
 import numpy as np
 
 f = open('./Trade-res.json')
-data = json.load(f)['data']['pool']
+data = json.load(f)['data']['tokens']
 
 swaps = []
 
-for curr_swap in data['swaps']:
+for curr_swap in data:
     #swap_distribution += [swap.Swap(float(curr_swap['amount0']), float(curr_swap['amount1']), int(curr_swap['timestamp']))]
     swaps.append(float(curr_swap['amount0']))
     
