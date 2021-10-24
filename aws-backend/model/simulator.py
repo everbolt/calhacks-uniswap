@@ -9,12 +9,16 @@ class Simulator:
         self.init1 = init1
         self.trades_per_day = trades_per_day
         self.trade_distr = trade_distr
+        self.pool.add_liquidity(price0Min, price0Max, init0, init1)
+        print(len(self.pool.liquidity_concentration))
 
     def simulate_day(self):
         num_trades = np.random.poisson(self.trades_per_day)
-        for _ in range(num_trades):
-            self.pool.swap(self.trade_distr())
-            #tracking gains/ losses
-
+        trades = self.trade_distr(num_trades)
+        for trade in trades:
+            self.pool.swap(trade)
+        print(self.pool.total_value())
+        return self.pool.total_value()/self.pool.init_value()
+    
     def run_simulations(self, num_days=365):
-        return
+        return [self.simulate_day() for _ in range(num_days)]

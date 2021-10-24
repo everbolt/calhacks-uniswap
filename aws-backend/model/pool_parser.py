@@ -48,7 +48,7 @@ def createPool(data_tick, data_pool, data_token):
         else: liquidity_concentration[i].prev = liquidity_concentration[i - 1].val
         if i == len(liquidity_concentration) - 1: liquidity_concentration[i].next = math.inf
         else: liquidity_concentration[i].next = liquidity_concentration[i + 1].val
-        print(liquidity_concentration[i])
+        #print(liquidity_concentration[i])
 
     # int(data['token1Price']) = (int(data['pool']['sqrtPrice']) / 2 ** 96) ** 2 / 10 ** (xxx - xxx)
     # above implies
