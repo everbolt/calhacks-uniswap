@@ -19,7 +19,7 @@ const POOL_TICKS = gql`
   }
 `
 
-function VerticalLine (prop) {
+function VerticalLine (props) {
   return (
     <Box
       sx={{
