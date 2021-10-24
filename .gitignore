@@ -1,1 +1,7 @@
 venv
+aws-backend/model/numpy
+aws-backend/model/numpy.libs
+aws-backend/model/scikit_learn.libs
+aws-backend/model/sklearn
+aws-backend/model/scipy
+aws-backend/model/scipy.libs

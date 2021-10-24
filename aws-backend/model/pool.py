@@ -102,6 +102,7 @@ class Pool:
                 deltaX = 0
         else:
             tickX = self.liquidity/self.liquidity_concentration[self.tick].prev-virtualX
+            print(tickX)
             if deltaX > tickX:
                 deltaX -= tickX
                 if self.tick >= self.leftTrack and self.tick < self.rightTrack:

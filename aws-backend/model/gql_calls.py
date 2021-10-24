@@ -20,6 +20,7 @@ def getTicks(pool_id):
   while not done:
     variables = {"skip": skip, "pool_id": pool_id}
     r = requests.post(url, json={"query": query , "variables": variables})
+    if r.status_code != 200: print("ERROR:", r.text)
     temp = json.loads(r.text)["data"]["pool"]["ticks"]
     for i in temp:
       res.append(i)
@@ -48,6 +49,7 @@ def getSwaps(pool_id):
   while not done:
     variables = {"max_timestamp": max_timestamp, "pool_id": pool_id}
     r = requests.post(url, json={"query": query , "variables": variables})
+    if r.status_code != 200: print("ERROR:", r.text)
     temp = json.loads(r.text)["data"]["pool"]["swaps"]
     for i in temp:
       res.append(i)
@@ -77,6 +79,7 @@ def getPoolData(pool_id):
   """
   variables = {"pool_id": pool_id}
   r = requests.post(url, json={"query": query , "variables": variables})
+  if r.status_code != 200: print("ERROR:", r.text)
   res = json.loads(r.text)["data"]["pool"]
   return res
 
@@ -107,5 +110,6 @@ def getTokenData():
   """
   variables = {"token_ids": token_ids}
   r = requests.post(url, json={"query": query , "variables": variables})
+  if r.status_code != 200: print("ERROR:", r.text)
   res = json.loads(r.text)["data"]["tokens"]
   return res
