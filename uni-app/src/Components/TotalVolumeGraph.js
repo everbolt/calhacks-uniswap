@@ -1,34 +1,20 @@
 import React from "react";
 
 import {Bar} from "react-chartjs-2"
-import { useQuery, gql } from "@apollo/client";
+
 import Box from '@mui/material/Box';
 
-const POOL_TICKS = gql`
-  query GetTokenValues {
-    pool(id: "0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8"){
-      ticks(first:1000 orderBy:tickIdx orderDirection:asc){
-        id
-        price0
-        price1
-        liquidityGross
-        liquidityNet
-        tickIdx
-      }
-    }
-  }
-`
 
-function VerticalLine (prop) {
+function VerticalLine (props) {
   return (
     <Box
       sx={{
         zIndex: 10,
         width: 2,
-        height: 385,
+        height: 368,
         position: "absolute",
-        marginLeft: "350px",
-        marginTop: "20px",
+        marginLeft: (113 + props.lineValue / 100 * 585) + 'px',
+        marginTop: "25px",
         backgroundColor: "#f731ed"
       }}
     />
@@ -36,29 +22,15 @@ function VerticalLine (prop) {
 }
 
 function TotalVolumeGraph(props) {
-  const { loading, error, data } = useQuery(POOL_TICKS);
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error</p>;
-  
-  //DISPLAY DATA HERE
-  // console.log(data)
-  // console.log(data['pool']['ticks'][200])
-  // console.log(data['pool']['ticks'][250])
-  const availableTicks = [[],[]];
-  var sum = 0;
-  for (let i = 0; i < data['pool']['ticks'].length; i++) {
-      sum += Number(data['pool']['ticks'][i]['liquidityNet']);
-      availableTicks[0].push(10**12 / (1.0001 ** Number(data['pool']['ticks'][i]['tickIdx'])));
-      availableTicks[1].push(sum ** 0.25);
-  }
-  console.log(availableTicks);
+  const availableTicks = props.availableTicks;
 
   const start = 175;
   const end = 700;
 
   return (
     <div>
-      <VerticalLine />
+      <VerticalLine lineValue={props.lineValue[0]}/>
+      <VerticalLine lineValue={props.lineValue[1]}/>
       <Bar
         data = {{
           labels: availableTicks[0].slice(start, end),
