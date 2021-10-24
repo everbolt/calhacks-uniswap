@@ -5,6 +5,7 @@ import TotalVolumeGraph from './Components/TotalVolumeGraph';
 import DropdownIntoConverter from './Components/DropdownIntoConverter';
 import RangeSlider from './Components/RangeSlider';
 import LineChart from './Components/LineChart';
+import SliderGraph from './Components/SliderGraph';
 
 const App = () => {
   return (
@@ -17,8 +18,7 @@ const App = () => {
           paddingLeft: '20px'
         }}
       >
-        <TotalVolumeGraph />
-        <RangeSlider />
+        <SliderGraph />
       </div>
       <div
         style={{

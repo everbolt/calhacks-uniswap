@@ -6,10 +6,14 @@ function valuetext(value) {
   return `${value}°C`;
 }
 
-const minDistance = 0;
 
-export default function RangeSlider() {
-  const [value, setValue] = React.useState([20, 37]);
+
+export default function RangeSlider(props) {
+  const minDistance = 0;
+  const minValue = 0;
+  const maxValue = props.sliderMax;
+
+  const [value, setValue] = React.useState([0.7 * minValue + 0.3 * maxValue, 0.3 * minValue + 0.7 * maxValue]);
 
   const handleChange = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
@@ -26,9 +30,9 @@ export default function RangeSlider() {
   return (
     <Box 
       sx={{ 
-        width: 415,
+        width: 605,
         paddingTop: "35px",
-        paddingLeft: "100px"
+        paddingLeft: "115px"
       }}
     >
       
@@ -38,6 +42,8 @@ export default function RangeSlider() {
         onChange={handleChange}
         valueLabelDisplay="on"
         getAriaValueText={valuetext}
+        min={minValue}
+        max={maxValue}
         disableSwap
       />
         
