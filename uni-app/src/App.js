@@ -4,6 +4,10 @@ import TotalVolumeGraph from './Components/TotalVolumeGraph';
 
 import DropdownIntoConverter from './Components/DropdownIntoConverter';
 import RangeSlider from './Components/RangeSlider';
+<<<<<<< Updated upstream
+=======
+import LineChart from './Components/LineChart';
+>>>>>>> Stashed changes
 
 const App = () => {
   return (

@@ -45,10 +45,14 @@ function CoinInput(props) {
   const scale = props.scale;
   
   return (
-    <fieldset>
+    <fieldset
+      style={{
+        borderColor: "white",
+        borderStyle: "solid"
+      }}
+    >
       <legend>Enter number of {scale ? scale : "COIN"}:</legend>
-      <input value={amount}
-              onChange={handleChange} />
+      <input value={amount} onChange={handleChange} />
     </fieldset>
   );
 }
@@ -101,7 +105,11 @@ function Calculator(props) {
   const coinB_val = scale === coinA_name ? tryConvert(amount, toCoinB) : amount;
 
   return (
-    <div>
+    <div
+      style={{
+        width: "fit-content"
+      }}
+    >
     <CoinInput
       scale={coinA_name}
       amount={coinA_val}
