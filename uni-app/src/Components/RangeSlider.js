@@ -27,6 +27,7 @@ export default function RangeSlider() {
     <Box 
       sx={{ 
         width: 415,
+        paddingTop: "35px",
         paddingLeft: "100px"
       }}
     >

@@ -85,6 +85,8 @@ function Calculator(props) {
   }
 
   const exchangeRate = scaleAmount[coinA_name] / scaleAmount[coinB_name];
+
+  // p_a is lowerbound, p_b is upperbound. retrieve values from slider. 
   function toCoinA(coinB_val) {
     // return L ^ 2 / (coinB_val + L * sqrt(p_a)) - L / sqrt(p_b);
     return coinB_val / exchangeRate;

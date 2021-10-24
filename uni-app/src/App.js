@@ -10,7 +10,7 @@ const App = () => {
     <div>
       <div
         style={{
-          width: '50%',
+          width: '70%',
           float: 'right',
           paddingTop: '20px',
           paddingLeft: '20px'
