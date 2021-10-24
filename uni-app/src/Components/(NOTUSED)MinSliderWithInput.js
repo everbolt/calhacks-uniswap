@@ -37,7 +37,7 @@ export default function MinimumDistanceSliderWithInput() {
       setValue(['', value[1]]);
     } else {
       var inputNumber = Number(event.target.value)
-      setValue([Math.min(inputNumber, value[1]), Math.max(inputNumber, value[1])])
+      setValue([Math.min(inputNumber, value[0]), Math.max(inputNumber, value[0])])
     }
   };
 
@@ -60,9 +60,13 @@ export default function MinimumDistanceSliderWithInput() {
 
   return (
     <Box sx={{ width: 300 }}>
+      <Typography id="input-slider" gutterBottom>
+        {value[0]}
+        {value[1]}
+      </Typography>
       <Grid container spacing={2} alignItems="center">
         <Grid item>
-        <Input1
+          <Input1
             value={value[0]}
             size="small"
             onChange={handleInputChange1}
@@ -98,12 +102,6 @@ export default function MinimumDistanceSliderWithInput() {
               'aria-labelledby': 'input-slider',
             }}
           />
-        </Grid>
-        <Grid item>
-          <Typography id="input-slider" gutterBottom>
-            {value[0]}
-            {value[1]}
-          </Typography>
         </Grid>
       </Grid>
     </Box>
