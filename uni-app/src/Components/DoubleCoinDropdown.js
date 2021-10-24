@@ -1,20 +1,109 @@
-import React from "react";
-import { Grid } from "@mui/material";
-import { Box } from "@mui/system";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import { Grid } from '@mui/material';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
-import { token_names } from "./Data/token_names";
-import BasicSelect from "./Dropdown";
+import token_names from './Data/token_names.js'
+import { token_directory } from "./Data/token_directory";
+
+function availablePools (prop) {
+  console.log(prop);
+  const available = [];
+  for (var coin2 in token_directory[prop]) {
+    if (token_directory[prop][coin2]["500"] != "" || token_directory[prop][coin2]["3000"] != "" || token_directory[prop][coin2]["10000"] != "") {
+      available.push(coin2);
+    }
+  }
+  console.log(available);
+  return available;
+}
+
+function SelectA(prop) {
+  const token_names_array = prop.tokens; 
+  const [coin, setCoin] = React.useState('');
+
+  const handleChange = (event) => {
+    setCoin(event.target.value);
+    prop.setCoinA(event.target.value);
+  };
+  return (
+    <Box sx={{ minWidth: 120 }}>
+      <FormControl fullWidth>
+        <InputLabel id="coin-select">Coin</InputLabel>
+        <Select
+          labelId="coin-select"
+          id="coin-select"
+          value={coin}
+          label="Coin"
+          onChange={handleChange}
+        >
+          {token_names_array?.map(token => {
+            return (
+              <MenuItem key={token} value={token}>
+                {token ?? token}
+              </MenuItem>
+            );
+          })
+          }
+        </Select>
+      </FormControl>
+    </Box>
+  );
+}
+
+function SelectB(prop) {
+  const token_names_array = prop.tokens;
+  const [coin, setCoin] = React.useState('');
+
+  const handleChange = (event) => {
+    setCoin(event.target.value);
+  };
+  return (
+    <Box sx={{ minWidth: 120 }}>
+      <FormControl fullWidth>
+        <InputLabel id="coin-select">Coin</InputLabel>
+        <Select
+          labelId="coin-select"
+          id="coin-select"
+          value={coin}
+          label="Coin"
+          onChange={handleChange}
+        >
+          {token_names_array?.map(token => {
+            return (
+              <MenuItem key={token} value={token}>
+                {token ?? token}
+              </MenuItem>
+            );
+          })
+          }
+        </Select>
+      </FormControl>
+    </Box>
+  );
+}
 
 function DoubleDropdown(prop) {
+  const [coinA, setCoinA] = React.useState('');
+  const [coinB, setCoinB] = React.useState('');
+
+  
+
   return (
     <Box sx={{ width: 300 }}>
       <Grid container spacing={2} alignItems="center">
         <Grid item>
-          <BasicSelect tokens={Object.values(token_names)} />
+          <SelectA tokens={Object.keys(token_names.token_names)} setCoinA = {setCoinA} />
         </Grid>
-        <Grid item>
-          <BasicSelect tokens={Object.values(token_names)} />
-        </Grid>
+        {coinA != "" &&
+          <Grid item>
+            <SelectB tokens={availablePools(coinA)} coinA = {coinA} />
+          </Grid>
+        }
+        
       </Grid>
     </Box>
   )
