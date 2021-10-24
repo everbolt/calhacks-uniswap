@@ -13,14 +13,12 @@ class Pool:
         self.fees_collectedY = 0
         self.liquidity_tracked = 0
 
-    def verify_liquidity(quantity0, quantity1, minPrice0, maxPrice0):
-        return True
 
     def add_liquidity(self, minPrice0, maxPrice0, deltaX, deltaY, track=True):
-        print(minPrice0)
-        print(maxPrice0)
-        print(deltaX)
-        print(deltaY)
+        #print(minPrice0)
+        #print(maxPrice0)
+        #print(deltaX)
+        #print(deltaY)
         deltaL = None
         pa = np.sqrt(minPrice0)
         pb = np.sqrt(maxPrice0)
@@ -31,10 +29,11 @@ class Pool:
         else:
             deltaL = deltaX/(1/self.sqrtPrice - 1/pb)
             if abs(deltaL-deltaY/(self.sqrtPrice-pa)) > 0.1:
+                print("unable to add: " + str(abs(deltaL-deltaY/(self.sqrtPrice-pa))))
                 return
         if not deltaL:
             return
-        print(deltaL)
+        print("liquidity added:" + str(deltaL))
         lo = 0
         hi = len(self.liquidity_concentration)-1
         while lo < hi:
@@ -78,7 +77,7 @@ class Pool:
             self.liquidity_tracked = deltaL
         
     def swap(self, deltaX):
-        print("deltaX: " + str(deltaX))
+        # print("deltaX: " + str(deltaX))
         virtualX = self.liquidity/self.sqrtPrice
         init_price = self.sqrtPrice
         if deltaX < 0:
@@ -101,8 +100,9 @@ class Pool:
                     self.fees_collectedY += self.fee*deltaY*(self.liquidity_tracked/self.liquidity)
                 deltaX = 0
         else:
+            if self.liquidity_concentration[self.tick].prev == 0:
+                print(self.tick)
             tickX = self.liquidity/self.liquidity_concentration[self.tick].prev-virtualX
-            print(tickX)
             if deltaX > tickX:
                 deltaX -= tickX
                 if self.tick >= self.leftTrack and self.tick < self.rightTrack:
@@ -120,10 +120,10 @@ class Pool:
                 deltaX = 0
     
     def getX(self):
-        return self.liquidity/self.sqrtPrice - self.liquidity/self.liquidity_concentration[self.tick].next
+        return self.liquidity_tracked/self.sqrtPrice - self.liquidity_tracked/self.liquidity_concentration[self.rightTrack].prev
 
     def getY(self):
-        return self.liquidity*self.sqrtPrice - self.liquidity*self.liquidity_concentration[self.tick].prev
+        return self.liquidity_tracked*self.sqrtPrice - self.liquidity_tracked*self.liquidity_concentration[self.leftTrack].prev
     
     def value(self, X, Y):
         return X + Y/(self.sqrtPrice**2)

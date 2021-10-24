@@ -48,7 +48,7 @@ def createPool(data_tick, data_pool, data_token):
         else: liquidity_concentration[i].prev = liquidity_concentration[i - 1].val
         if i == len(liquidity_concentration) - 1: liquidity_concentration[i].next = math.inf
         else: liquidity_concentration[i].next = liquidity_concentration[i + 1].val
-        print(liquidity_concentration[i])
+        #print(liquidity_concentration[i])
 
     # int(data['token1Price']) = (int(data['pool']['sqrtPrice']) / 2 ** 96) ** 2 / 10 ** (xxx - xxx)
     # above implies
@@ -57,6 +57,7 @@ def createPool(data_tick, data_pool, data_token):
     ret_pool = pool.Pool(liquidity_concentration,
         int(data_pool['sqrtPrice']) / (2 ** 96 * 10 ** ((decimals_dic[data_pool['token1']['id']] - decimals_dic[data_pool['token0']['id']]) / 2)),
         int(data_pool['liquidity']) / 10 ** ((decimals_dic[data_pool['token0']['id']] + decimals_dic[data_pool['token1']['id']]) / 2),
-        curr_tick)
+        curr_tick,
+        fee=int(data_pool['feeTier'])/1000000)
     
     return ret_pool
