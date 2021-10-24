@@ -1,9 +1,10 @@
 from math import sqrt
 class Tick:
     ##pa and pb are square roots of endpoints of tick
-    def __init__(self, ltick, rtick, L):
-        self.pa = pow(1.0001, ltick)
-        self.pa = sqrt(self.pa)
-        self.pb = pow(1.0001, rtick)
-        self.pb = sqrt(self.pb)
-        self.L = L
+    def __init__(self, prev, next, idx, grossL, netL):
+        self.idx = idx
+        self.val = sqrt(pow(1.0001, idx))
+        self.prev = sqrt(pow(1.0001, prev))
+        self.next = sqrt(pow(1.0001, next))
+        self.grossL = grossL
+        self.netL = netL

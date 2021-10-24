@@ -4,11 +4,14 @@ from sklearn.mixture import GaussianMixture
 def create_trade_distribution(trade_data):
     models = []
     for i in range(10):
-        models.append(GaussianMixture(i+1).fit(trade_data))
+        models.append(GaussianMixture(n_components=i+1).fit(trade_data))
     BIC = [m.bic(trade_data) for m in models]
     best_model = models[np.argmin(BIC)]
+    print(best_model.n_components)
 
-    def trade_dist():
-        return best_model.sample()
+    def trade_dist(n=1):
+        samples = best_model.sample(n_samples=n)[0].reshape(n)
+        np.random.shuffle(samples)
+        return samples
 
     return trade_dist
