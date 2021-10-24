@@ -86,10 +86,12 @@ function Calculator(props) {
 
   const exchangeRate = scaleAmount[coinA_name] / scaleAmount[coinB_name];
   function toCoinA(coinB_val) {
+    // return L ^ 2 / (coinB_val + L * sqrt(p_a)) - L / sqrt(p_b);
     return coinB_val / exchangeRate;
   }
   
   function toCoinB(coinA_val) {
+    // return L ^ 2 / (coinA_val + L / sqrt(p_b)) - L * sqrt(p_a);
     return coinA_val * exchangeRate;
   }  
 
