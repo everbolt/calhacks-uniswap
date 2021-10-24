@@ -31,7 +31,7 @@ class Pool:
                 self.sqrtPrice = np.sqrt(virtualY/virtualX)
                 deltaX = 0
         else:
-            tickX = self.liquidity*self.liquidity_concentration[self.tick].pa-virtualX
+            tickX = self.liquidity/self.liquidity_concentration[self.tick].pa-virtualX
             if deltaX > tickX:
                 deltaX -= tickX
                 self.sqrtPrice = self.liquidity_concentration[self.tick].pa
@@ -45,6 +45,7 @@ class Pool:
                 deltaX = 0
     
     def getX(self):
+        print(str(self.liquidity/self.sqrtPrice) + " " + str(self.liquidity_concentration[self.tick].pb))
         return self.liquidity/self.sqrtPrice - self.liquidity/self.liquidity_concentration[self.tick].pb
 
     def getY(self):
