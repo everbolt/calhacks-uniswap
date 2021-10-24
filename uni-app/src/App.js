@@ -19,6 +19,8 @@ const App = () => {
   const [availableFeeTier, setAvailableFeeTier] = React.useState([false, false, false]);
   const [feeTier, setFeeTier] = React.useState('');
 
+  //ADDING API CALL PARAMETERS
+
   const POOL_TICKS = gql`
     query GetTokenValues($pool_id: String!) {
       pool(id: $pool_id){

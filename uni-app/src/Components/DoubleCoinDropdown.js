@@ -112,6 +112,9 @@ function SelectBDisabled(prop) {
         <Select
           labelId="coin-select"
           id="coin-select"
+          style={{
+            backgroundColor: "#ababab"
+          }}
           disabled
         >
         </Select>
