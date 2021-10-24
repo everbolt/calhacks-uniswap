@@ -3,7 +3,7 @@ import pool
 import tick
 import math
 
-f = open('model\Tick-res.json')
+f = open('./Tick-res.json')
 data = json.load(f)['data']
 
 liquidity_concentration = []

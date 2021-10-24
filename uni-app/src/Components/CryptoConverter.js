@@ -57,8 +57,8 @@ function Calculator(props) {
   
   //TODO TODO TODO TODO
   //REMOVE THESE LATER=============================
-  var coinA_name = 'DAI'
-  var coinB_name = 'USDC'
+  var coinA_name = props.coinA_name
+  var coinB_name = props.coinB_name
   //ADD THESE INSTEAD
   //coinA = props.coinA
   //coinB = props.coinB

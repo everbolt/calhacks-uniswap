@@ -10,9 +10,19 @@ class Pool:
     def verify_liquidity(quantity0, quantity1, minPrice0, maxPrice0):
         return True
 
-    def add_liquidity(self, minPrice0, maxPrice0, quantity0, quantity1):
-        if not self.verify_liquidity(quantity0, quantity1):
+    def add_liquidity(self, minPrice0, maxPrice0, deltaX, deltaY):
+        deltaL = None
+        if deltaX == 0:
+            deltaL = deltaY/(np.sqrt(maxPrice0)-np.sqrt(minPrice0))
+        elif deltaY == 0:
+            deltaL = deltaX/(1/np.sqrt(minPrice0)-1/np.sqrt(maxPrice0))
+        else:
+            deltaL = deltaX/(1/self.sqrtPrice - 1/np.sqrt(maxPrice0))
+            if abs(deltaL-deltaY/(self.sqrtPrice-np.sqrt(minPrice0))) > 0.01:
+                return
+        if not deltaL:
             return
+        
         
     def swap(self, deltaX):
         print("deltaX: " + str(deltaX))
@@ -31,7 +41,7 @@ class Pool:
                 self.sqrtPrice = np.sqrt(virtualY/virtualX)
                 deltaX = 0
         else:
-            tickX = self.liquidity*self.liquidity_concentration[self.tick].pa-virtualX
+            tickX = self.liquidity/self.liquidity_concentration[self.tick].pa-virtualX
             if deltaX > tickX:
                 deltaX -= tickX
                 self.sqrtPrice = self.liquidity_concentration[self.tick].pa
@@ -45,6 +55,7 @@ class Pool:
                 deltaX = 0
     
     def getX(self):
+        print(str(self.liquidity/self.sqrtPrice) + " " + str(self.liquidity_concentration[self.tick].pb))
         return self.liquidity/self.sqrtPrice - self.liquidity/self.liquidity_concentration[self.tick].pb
 
     def getY(self):
