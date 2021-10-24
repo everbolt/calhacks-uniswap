@@ -3,8 +3,8 @@ from sklearn.mixture import GaussianMixture
 
 def create_trade_distribution(trade_data):
     models = []
-    for i in range(10):
-        models.append(GaussianMixture(n_components=i+1).fit(trade_data))
+    for i in range(5, 25):
+        models.append(GaussianMixture(n_components=i+1, covariance_type='spherical').fit(trade_data))
     BIC = [m.bic(trade_data) for m in models]
     best_model = models[np.argmin(BIC)]
     print(best_model.n_components)
