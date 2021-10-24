@@ -16,41 +16,36 @@ class Pool:
         
     def swap(self, deltaX):
         print("deltaX: " + str(deltaX))
+        virtualX = self.liquidity/self.sqrtPrice
         if deltaX < 0:
-            if abs(deltaX) > self.liquidity*(1/self.liquidity_concentration[self.tick].pa - 1/self.sqrtPrice):
-                deltaX += self.liquidity*(1/self.liquidity_concentration[self.tick].pa - 1/self.sqrtPrice)
+            tickX = virtualX - self.liquidity/self.liquidity_concentration[self.tick].pb
+            if abs(deltaX) > tickX:
+                deltaX += tickX
                 self.sqrtPrice = self.liquidity_concentration[self.tick].pb
                 self.tick += 1
                 self.liquidity = self.liquidity_concentration[self.tick].L
                 self.swap(deltaX)
             else:
-                curX = self.liquidity/self.sqrtPrice
-                curX += deltaX
-                curY = (self.liquidity**2)/(curX+self.liquidity/self.liquidity_concentration[self.tick].pb)-self.liquidity*self.liquidity_concentration[self.tick].pa
-                print(curX)
-                print(curY)
-                self.sqrtPrice = np.sqrt(curY/curX)
+                virtualX += deltaX
+                virtualY = (self.liquidity/np.sqrt(virtualX))**2
+                self.sqrtPrice = np.sqrt(virtualY/virtualX)
+                deltaX = 0
         else:
-            print(self.liquidity*(1/self.sqrtPrice-1/self.liquidity_concentration[self.tick].pb))
-            if deltaX > self.liquidity*(1/self.sqrtPrice-1/self.liquidity_concentration[self.tick].pb):
-                deltaX -= self.liquidity/self.sqrtPrice-self.liquidity_concentration[self.tick].L/self.liquidity_concentration[self.tick].pb
+            tickX = self.liquidity*self.liquidity_concentration[self.tick].pa-virtualX
+            if deltaX > tickX:
+                deltaX -= tickX
                 self.sqrtPrice = self.liquidity_concentration[self.tick].pa
                 self.tick -= 1
                 self.liquidity = self.liquidity_concentration[self.tick].L
                 self.swap(deltaX)
             else:
-                curX = self.liquidity/self.sqrtPrice-self.liquidity/self.liquidity_concentration[self.tick].pb
-                curX += deltaX
-                print(str(self.liquidity_concentration[self.tick].pa) + " " + str(self.liquidity_concentration[self.tick].pb))
-                curY = (self.liquidity**2)/(curX+self.liquidity/self.liquidity_concentration[self.tick].pb)-self.liquidity*self.liquidity_concentration[self.tick].pa
-                print(curX)
-                print(curY)
-                self.sqrtPrice = np.sqrt(curY/curX)
+                virtualX += deltaX
+                virtualY = (self.liquidity/np.sqrt(virtualX))**2
+                self.sqrtPrice = np.sqrt(virtualY/virtualX)
                 deltaX = 0
     
     def getX(self):
-        return self.liquidity/self.sqrtPrice-self.liquidity/self.liquidity_concentration[self.tick].pb
+        return self.liquidity/self.sqrtPrice - self.liquidity/self.liquidity_concentration[self.tick].pb
 
     def getY(self):
-        curX = self.liquidity/self.sqrtPrice-self.liquidity/self.liquidity_concentration[self.tick].pb
-        return (self.liquidity**2)/(curX+self.liquidity/self.liquidity_concentration[self.tick].pb)-self.liquidity*self.liquidity_concentration[self.tick].pa
+        return self.liquidity*self.sqrtPrice - self.liquidity*self.liquidity_concentration[self.tick].pa
