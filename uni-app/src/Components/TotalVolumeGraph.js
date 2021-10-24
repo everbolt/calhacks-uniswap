@@ -18,7 +18,7 @@ const POOL_TICKS = gql`
   }
 `
 
-const TotalVolumeGraph = () => {
+const TotalVolumeGraph = (prop) => {
   const { loading, error, data } = useQuery(POOL_TICKS);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error</p>;
@@ -32,7 +32,7 @@ const TotalVolumeGraph = () => {
   for (let i = 0; i < data['pool']['ticks'].length; i++) {
       sum += Number(data['pool']['ticks'][i]['liquidityNet']);
       availableTicks[0].push(10**12 / (1.0001 ** Number(data['pool']['ticks'][i]['tickIdx'])));
-      availableTicks[1].push(sum);
+      availableTicks[1].push(sum ** 0.25);
   }
   console.log(availableTicks);
 
@@ -55,7 +55,6 @@ const TotalVolumeGraph = () => {
             // }, 
           ]
         }}
-        
         options = {{
           interaction: {
             mode: 'index',
@@ -66,14 +65,20 @@ const TotalVolumeGraph = () => {
           backgroundColor: "#080554",
           pointBackgroundColor: "#f731ed",
           scales: {
-            x: {
+            xAxis: {
+              scaleId: 'xAxis',
               type: 'linear',
+              beginAtZero: true,
+              min: 0,
               // suggestedMin: 0,
               // suggestedMax: 400000
-            }
+            },
           },
-          barThickness: "flex"
+          barThickness: "flex",
+          borderWidth: 1,
+          hoverBorderColor: "#ffffff",      
         }}
+      
       
       />
     </div>
