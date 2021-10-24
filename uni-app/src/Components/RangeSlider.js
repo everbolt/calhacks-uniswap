@@ -22,17 +22,21 @@ export default function RangeSlider(props) {
 
     if (activeThumb === 0) {
       setValue([Math.min(newValue[0], value[1] - minDistance), value[1]]);
+      props.setLineValue([Math.min(newValue[0], value[1] - minDistance), value[1]])
+      console.log("Changed 0")
     } else {
       setValue([value[0], Math.max(newValue[1], value[0] + minDistance)]);
+      props.setLineValue([value[0], Math.max(newValue[1], value[0] + minDistance)])
+      console.log("Changed 1")
     }
   };
   
   return (
     <Box 
       sx={{ 
-        width: 605,
+        width: 585,
         paddingTop: "35px",
-        paddingLeft: "115px"
+        paddingLeft: "113px"
       }}
     >
       

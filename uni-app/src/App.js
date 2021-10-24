@@ -6,10 +6,42 @@ import RangeSlider from './Components/RangeSlider';
 import uniflow_logo from './Components/uniflow.png'
 import LineChart from './Components/LineChart';
 import SliderGraph from './Components/SliderGraph';
+import { useQuery, gql } from "@apollo/client";
+
+const POOL_TICKS = gql`
+  query GetTokenValues {
+    pool(id: "0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8"){
+      ticks(first:1000 orderBy:tickIdx orderDirection:asc){
+        id
+        price0
+        price1
+        liquidityGross
+        liquidityNet
+        tickIdx
+      }
+    }
+  }
+`
 
 //"#0F051B"
 //"#FFFFFF"
 const App = () => {
+  const { loading, error, data } = useQuery(POOL_TICKS);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error</p>;
+  
+  //DISPLAY DATA HERE
+  // console.log(data)
+  // console.log(data['pool']['ticks'][200])
+  // console.log(data['pool']['ticks'][250])
+  const availableTicks = [[],[]];
+  var sum = 0;
+  for (let i = 0; i < data['pool']['ticks'].length; i++) {
+      sum += Number(data['pool']['ticks'][i]['liquidityNet']);
+      availableTicks[0].push(10**12 / (1.0001 ** Number(data['pool']['ticks'][i]['tickIdx'])));
+      availableTicks[1].push(sum ** 0.25);
+  }
+  console.log(availableTicks);
   return (
     <div
       style={{
@@ -27,7 +59,7 @@ const App = () => {
             paddingLeft: '20px'
           }}
         >
-          <SliderGraph />
+          <SliderGraph availableTicks={availableTicks}/>
         </div>
         <div
           style={{
