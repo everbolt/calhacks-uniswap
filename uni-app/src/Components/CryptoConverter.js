@@ -45,10 +45,14 @@ function CoinInput(props) {
   const scale = props.scale;
   
   return (
-    <fieldset>
-      <legend>Enter number of {scale}:</legend>
-      <input value={amount}
-              onChange={handleChange} />
+    <fieldset
+      style={{
+        borderColor: "white",
+        borderStyle: "solid"
+      }}
+    >
+      <legend>Enter number of {scale ? scale : "COIN"}:</legend>
+      <input value={amount} onChange={handleChange} />
     </fieldset>
   );
 }
@@ -85,11 +89,15 @@ function Calculator(props) {
   }
 
   const exchangeRate = scaleAmount[coinA_name] / scaleAmount[coinB_name];
+
+  // p_a is lowerbound, p_b is upperbound. retrieve values from slider. 
   function toCoinA(coinB_val) {
+    // return L ^ 2 / (coinB_val + L * sqrt(p_a)) - L / sqrt(p_b);
     return coinB_val / exchangeRate;
   }
   
   function toCoinB(coinA_val) {
+    // return L ^ 2 / (coinA_val + L / sqrt(p_b)) - L * sqrt(p_a);
     return coinA_val * exchangeRate;
   }  
 
@@ -97,7 +105,11 @@ function Calculator(props) {
   const coinB_val = scale === coinA_name ? tryConvert(amount, toCoinB) : amount;
 
   return (
-    <div>
+    <div
+      style={{
+        width: "fit-content"
+      }}
+    >
     <CoinInput
       scale={coinA_name}
       amount={coinA_val}

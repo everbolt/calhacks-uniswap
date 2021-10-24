@@ -24,7 +24,13 @@ export default function RangeSlider() {
   };
   
   return (
-    <Box sx={{ width: 300 }}>
+    <Box 
+      sx={{ 
+        width: 415,
+        paddingTop: "35px",
+        paddingLeft: "100px"
+      }}
+    >
       
       <Slider
         getAriaLabel={() => 'Minimum distance'}

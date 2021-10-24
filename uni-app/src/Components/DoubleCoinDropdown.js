@@ -86,6 +86,22 @@ function SelectB(prop) {
   );
 }
 
+function SelectBDisabled(prop) {
+  return (
+    <Box sx={{ minWidth: 120 }}>
+      <FormControl fullWidth>
+        <InputLabel id="coin-select">Coin</InputLabel>
+        <Select
+          labelId="coin-select"
+          id="coin-select"
+          disabled
+        >
+        </Select>
+      </FormControl>
+    </Box>
+  );
+}
+
 function DoubleDropdown(prop) {
   const [coinA, setCoinA] = React.useState('');  
 
@@ -95,7 +111,11 @@ function DoubleDropdown(prop) {
         <Grid item>
           <SelectA tokens={Object.keys(token_names.token_names)} setCoinA = {setCoinA} setCoinA_name = {prop.setCoinA_name}/>
         </Grid>
-        {coinA !== "" &&
+        {coinA === "" ?
+          <Grid item>
+            <SelectBDisabled />
+          </Grid>
+          :
           <Grid item>
             <SelectB tokens={availablePools(coinA)} coinA = {coinA} setCoinB_name = {prop.setCoinB_name}/>
           </Grid>
