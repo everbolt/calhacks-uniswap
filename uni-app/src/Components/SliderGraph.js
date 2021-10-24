@@ -3,14 +3,14 @@ import TotalVolumeGraph from "./TotalVolumeGraph";
 import RangeSlider from "./RangeSlider";
 
 
-function SliderGraph(props) {
+function SliderGraph(prop) {
   const [lineValue, setLineValue] = React.useState([30, 70])  
   
   return (
     <div>
       <TotalVolumeGraph
         lineValue={lineValue}
-        availableTicks={props.availableTicks}
+        availableTicks={prop.availableTicks}
       />
       <RangeSlider
         sliderMax={100}

@@ -36,13 +36,13 @@ function tryConvert(amount, convert) {
   return rounded.toString();
 }
 
-function CoinInput(props) {
+function CoinInput(prop) {
   function handleChange(e) {
-    props.onCoinChange(e.target.value);
+    prop.onCoinChange(e.target.value);
   }
 
-  const amount = props.amount;
-  const scale = props.scale;
+  const amount = prop.amount;
+  const scale = prop.scale;
   
   return (
     <fieldset
@@ -63,15 +63,15 @@ function CoinInput(props) {
   );
 }
 
-function Calculator(props) {
+function Calculator(prop) {
   
   //TODO TODO TODO TODO
   //REMOVE THESE LATER=============================
-  var coinA_name = props.coinA_name
-  var coinB_name = props.coinB_name
+  var coinA_name = prop.coinA_name
+  var coinB_name = prop.coinB_name
   //ADD THESE INSTEAD
-  //coinA = props.coinA
-  //coinB = props.coinB
+  //coinA = prop.coinA
+  //coinB = prop.coinB
 
   const [amount, setAmount] = React.useState('');
   const [scale, setScale] = React.useState(coinA_name);

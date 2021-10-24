@@ -5,14 +5,14 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import token_names from './Data/token_names.js'
 import { token_directory } from "./Data/token_directory";
 
-export default function FeeTierSelector(props) {
+export default function FeeTierSelector(prop) {
   const [alignment, setAlignment] = React.useState('web');
 
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);
-    props.setFeeTier(event.target.value);
-    console.log(token_directory[props.coinA_name][props.coinB_name][event.target.value])    
-    props.setPoolId(token_directory[props.coinA_name][props.coinB_name][event.target.value])
+    prop.setFeeTier(event.target.value);
+    console.log(token_directory[prop.coinA_name][prop.coinB_name][event.target.value])    
+    prop.setPoolId(token_directory[prop.coinA_name][prop.coinB_name][event.target.value])
   };
 
   return (
@@ -22,7 +22,7 @@ export default function FeeTierSelector(props) {
       exclusive
       onChange={handleChange}
     >
-      {props.availableFeeTier[0] ? 
+      {prop.availableFeeTier[0] ? 
         <ToggleButton 
           value="500" 
         >
@@ -36,7 +36,7 @@ export default function FeeTierSelector(props) {
       </ToggleButton>}
       
       
-      {props.availableFeeTier[1] ? 
+      {prop.availableFeeTier[1] ? 
         <ToggleButton 
           value="3000" 
         >
@@ -50,7 +50,7 @@ export default function FeeTierSelector(props) {
       </ToggleButton>}
       
       
-      {props.availableFeeTier[2] ? 
+      {prop.availableFeeTier[2] ? 
         <ToggleButton 
           value="10000" 
         >

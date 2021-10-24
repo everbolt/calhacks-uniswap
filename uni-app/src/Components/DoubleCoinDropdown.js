@@ -64,6 +64,17 @@ function SelectB(prop) {
   const handleChange = (event) => {
     setCoin(event.target.value);
     prop.setCoinB_name(event.target.value);
+    const feeTier=[true,true,true];
+    if (token_directory[prop.coinA_name][event.target.value]["500"] === "") {
+      feeTier[0] = false;
+    }
+    if (token_directory[prop.coinA_name][event.target.value]["3000"] === "") {
+      feeTier[1] = false;
+    }
+    if (token_directory[prop.coinA_name][event.target.value]["10000"] === "") {
+      feeTier[2] = false;
+    }
+    prop.setAvailableFeeTier(feeTier);
   };
   return (
     <Box sx={{ minWidth: 120 }}>
@@ -117,7 +128,14 @@ function DoubleDropdown(prop) {
     <Box sx={{ width: 300 }}>
       <Grid container spacing={2} alignItems="center">
         <Grid item>
-          <SelectA tokens={Object.keys(token_names.token_names)} coinA_name={prop.coinA_name} coinB_name={prop.coinB_name} setCoinA_name={prop.setCoinA_name} setCoinB_name={prop.setCoinB_name} setAvailableFeeTier={prop.setAvailableFeeTier}/>
+          <SelectA 
+            tokens={Object.keys(token_names.token_names)} 
+            coinA_name={prop.coinA_name} 
+            coinB_name={prop.coinB_name} 
+            setCoinA_name={prop.setCoinA_name} 
+            setCoinB_name={prop.setCoinB_name} 
+            setAvailableFeeTier={prop.setAvailableFeeTier}
+          />
         </Grid>
         {prop.coinA_name === "" ?
           <Grid item>
@@ -125,7 +143,15 @@ function DoubleDropdown(prop) {
           </Grid>
           :
           <Grid item>
-            <SelectB tokens={availablePools(prop.coinA_name)} coinA_name={prop.coinA_name} coinB_name={prop.coinB_name} setCoinB_name={prop.setCoinB_name} setPoolId={prop.setPoolId} feeTier={prop.feeTier}/>
+            <SelectB 
+              tokens={availablePools(prop.coinA_name)} 
+              coinA_name={prop.coinA_name} 
+              coinB_name={prop.coinB_name} 
+              setCoinB_name={prop.setCoinB_name} 
+              setPoolId={prop.setPoolId} 
+              feeTier={prop.feeTier}
+              setAvailableFeeTier={prop.setAvailableFeeTier}
+            />
           </Grid>
         }
         

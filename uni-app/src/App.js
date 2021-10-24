@@ -13,6 +13,11 @@ import { useQuery, gql } from "@apollo/client";
 //"#FFFFFF"
 const App = () => {
   const [poolId, setPoolId] = React.useState("0x8ad599c3a0ff1de082011efddc58f1908eb6e6d8");
+  
+  const [coinA_name, setCoinA_name] = React.useState("");
+  const [coinB_name, setCoinB_name] = React.useState("");
+  const [availableFeeTier, setAvailableFeeTier] = React.useState([false, false, false]);
+  const [feeTier, setFeeTier] = React.useState('');
 
   const POOL_TICKS = gql`
     query GetTokenValues($pool_id: String!) {
@@ -41,7 +46,6 @@ const App = () => {
       availableTicks[0].push(10**12 / (1.0001 ** Number(data['pool']['ticks'][i]['tickIdx'])));
       availableTicks[1].push(sum ** 0.25);
   }
-  console.log(availableTicks);
   return (
     <div
       style={{
@@ -59,7 +63,19 @@ const App = () => {
             paddingLeft: '20px'
           }}
         >
-          <SliderGraph availableTicks={availableTicks}/>
+          <SliderGraph 
+            availableTicks={availableTicks}
+            
+            setPoolId={setPoolId} 
+            coinA_name={coinA_name} 
+            setCoinA_name={setCoinA_name} 
+            coinB_name={coinB_name} 
+            setCoinB_name={setCoinB_name}
+            availableFeeTier={availableFeeTier}
+            setAvailableFeeTier={setAvailableFeeTier}
+            feeTier={feeTier}
+            setFeeTier={setFeeTier}
+          />
         </div>
         <div
           style={{
@@ -97,7 +113,17 @@ const App = () => {
               paddingLeft: "160px"
             }}
           >
-            <DropdownIntoConverter setPoolId={setPoolId}/>
+            <DropdownIntoConverter 
+              setPoolId={setPoolId} 
+              coinA_name={coinA_name} 
+              setCoinA_name={setCoinA_name} 
+              coinB_name={coinB_name} 
+              setCoinB_name={setCoinB_name}
+              availableFeeTier={availableFeeTier}
+              setAvailableFeeTier={setAvailableFeeTier}
+              feeTier={feeTier}
+              setFeeTier={setFeeTier}
+            />
           </div>
           
         </div>
