@@ -38,6 +38,9 @@ function SelectA(prop) {
           value={coin}
           label="Coin"
           onChange={handleChange}
+          style={{
+            backgroundColor: "#FFFFFF"
+          }}
         >
           {token_names_array?.map(token => {
             return (
@@ -71,6 +74,9 @@ function SelectB(prop) {
           value={coin}
           label="Coin"
           onChange={handleChange}
+          style={{
+            backgroundColor: "#FFFFFF"
+          }}
         >
           {token_names_array?.map(token => {
             return (

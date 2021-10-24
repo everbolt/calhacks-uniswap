@@ -51,7 +51,13 @@ function CoinInput(props) {
         borderStyle: "solid"
       }}
     >
-      <legend>Enter number of {scale ? scale : "COIN"}:</legend>
+      <legend
+        style={{
+          color: "white"
+        }}
+      >
+        Enter number of {scale ? scale : "COIN"}:
+      </legend>
       <input value={amount} onChange={handleChange} />
     </fieldset>
   );

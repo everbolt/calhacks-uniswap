@@ -45,7 +45,7 @@ const TotalVolumeGraph = (prop) => {
           labels: availableTicks[0].slice(start, end),
           datasets: [
             {
-              label: 'DataSet1',
+              label: 'Total Volume Locked',
               data: availableTicks[1].slice(start, end),
               // fill: +1,
             }, 
@@ -61,8 +61,8 @@ const TotalVolumeGraph = (prop) => {
             axis: 'x',
             intersect: false
           },
-          borderColor: "#080554",
-          backgroundColor: "#080554",
+          borderColor: "#FFFFFF",
+          backgroundColor: "#FFFFFF",
           pointBackgroundColor: "#f731ed",
           scales: {
             xAxis: {
@@ -70,13 +70,28 @@ const TotalVolumeGraph = (prop) => {
               type: 'linear',
               beginAtZero: true,
               min: 0,
+              ticks: {
+                color: "#FFFFFF"
+              },
+              grid: {
+                color: "#adadad",
+              },
               // suggestedMin: 0,
               // suggestedMax: 400000
             },
+            yAxis: {
+              ticks: {
+                color: "#FFFFFF"
+              },
+              grid: {
+                color: "#adadad"
+              }
+            }
           },
           barThickness: "flex",
           borderWidth: 1,
-          hoverBorderColor: "#ffffff",      
+          hoverBorderColor: "#ffffff",
+          
         }}
       
       
