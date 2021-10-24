@@ -1,13 +1,13 @@
 import json
 import swap
-import math
 
 f = open('model/Trade-res.json')
 data = json.load(f)['data']['pool']
 
-swap_distribution = []
+swaps = []
 
 for curr_swap in data['swaps']:
-    swap_distribution += [swap.Swap(float(curr_swap['amount0']), float(curr_swap['amount1']), int(curr_swap['timestamp']))]
+    swaps += [swap.Swap(float(curr_swap['amount0']), float(curr_swap['amount1']), int(curr_swap['timestamp']))]
 
-print(swap_distribution)
+def get_swaps():
+    return swaps
