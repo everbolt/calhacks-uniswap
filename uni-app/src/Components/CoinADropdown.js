@@ -6,13 +6,13 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import token_names from './Data/token_names.js'
 
-export default function BasicSelect(prop) {
+export default function SelectA(prop) {
   const token_names_array = prop.tokens; 
   const [coin, setCoin] = React.useState('');
 
   const handleChange = (event) => {
-    console.log(event.target.value);
     setCoin(event.target.value);
+    prop.setCoinA(coin);
   };
   return (
     <Box sx={{ minWidth: 120 }}>
