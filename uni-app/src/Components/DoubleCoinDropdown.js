@@ -12,7 +12,7 @@ import { token_directory } from "./Data/token_directory";
 function availablePools (prop) {
   const available = [];
   for (var coin2 in token_directory[prop]) {
-    if (token_directory[prop][coin2]["500"] != "" || token_directory[prop][coin2]["3000"] != "" || token_directory[prop][coin2]["10000"] != "") {
+    if (token_directory[prop][coin2]["500"] !== "" || token_directory[prop][coin2]["3000"] !== "" || token_directory[prop][coin2]["10000"] !== "") {
       available.push(coin2);
     }
   }
@@ -95,7 +95,7 @@ function DoubleDropdown(prop) {
         <Grid item>
           <SelectA tokens={Object.keys(token_names.token_names)} setCoinA = {setCoinA} setCoinA_name = {prop.setCoinA_name}/>
         </Grid>
-        {coinA != "" &&
+        {coinA !== "" &&
           <Grid item>
             <SelectB tokens={availablePools(coinA)} coinA = {coinA} setCoinB_name = {prop.setCoinB_name}/>
           </Grid>
