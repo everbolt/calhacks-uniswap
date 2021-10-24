@@ -1,7 +1,7 @@
 from tick import Tick
 from pool import Pool
 from trade_distribution import create_trade_distribution
-from swap_parser import get_swap_dist
+from swap_parser import get_swapa
 import numpy as np
 
 '''
@@ -20,7 +20,7 @@ print(p.getX())
 print(p.getY())
 '''
 
-dist = get_swap_dist()
+dist = get_swaps()
 print(sum(dist)/len(dist))
 np.random.shuffle(dist)
 #print(dist)

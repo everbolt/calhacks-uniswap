@@ -1,0 +1,10 @@
+{
+    "USDC": {
+        "decimals": 6,
+        "derivedETH": "0.0002397890009778729315040001886223091"
+    },
+    "WETH": {
+        "decimals": 18,
+        "derivedETH": "1"
+    }
+}

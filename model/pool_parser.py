@@ -23,6 +23,7 @@ for i in range(len(liquidity_concentration)):
 # above implies
 # *true* sqrtPrice = int(data['pool']['sqrtPrice']) / (2 ** 96 * 10 ** ((xxx - xxx) / 2))
 
-curr_pool = pool.Pool(liquidity_concentration, int(data['pool']['sqrtPrice']), int(data['pool']['liquidity']), int(data['pool']['tick']))
+ret_pool = pool.Pool(liquidity_concentration, int(data['pool']['sqrtPrice']), int(data['pool']['liquidity']), int(data['pool']['tick']))
 
-print(curr_pool)
+def get_pool():
+    return ret_pool
